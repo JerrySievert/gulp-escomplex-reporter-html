@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="Complexity">
+  <head>
+    <link rel="stylesheet" href="css/site.css">
+    <title>Complexity Analysis</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"></script>
+  </head>
+  <body ng-controller="complexityController">
+    <div>
+      <h1>Complexity Analysis</h1>
+      <hr>
+      <h2>{{data.packageName}} - {{data.packageVersion}}</h2>
+    </div>
+    <div class="container">
+      <div class="column-24" ng-repeat="complexity in data.complexity">
+        <div class="column-8">
+          <h3>{{complexity.meta.filename}}</h3>
+          {{complexity.aggregate.sloc.logical}} <strong>Logical Lines of Code</strong>
+          <br>
+          {{complexity.aggregate.sloc.physical}} <strong>Physical Lines of Code</strong>
+          <br>
+          <strong>Cyclomatic Density:</strong> {{complexity.aggregate.cyclomatic}}
+          <br>
+          <strong>Maintainability:</strong> {{complexity.maintainability}}
+        </div>
+        <div class="column-16">
+          <graph data="complexity.chart" height="400px" width="100%">
+            <x field="Halstead Difficulty" type="Measure"></x>
+            <y field="Cyclomatic Density" type="Measure"></y>
+            <!-- plot all of Aperture's SKU's against profit and sales
+                 'series' is the data you'd like to plot on the graph -->
+            <scatter-plot field="Halstead Difficulty" series="Cyclomatic Density" label="Function"></scatter-plot>
+          </graph>
+        </div>
+      </div>
+    </div>
+    <script src="js/complexity.js"></script>
+    <script src="js/angular-dimple.js"></script>
+  </body>
+</html>
