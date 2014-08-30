@@ -1,6 +1,6 @@
 {
   "name": "gulp-escomplex-reporter-html",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "description": "HTML Reporter for gulp-escomplex",
   "main": "index.js",
   "scripts": {
