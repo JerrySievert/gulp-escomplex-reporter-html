@@ -15,7 +15,7 @@ app.controller('complexityController', function ($scope, $http) {
         var functions = [ ];
         for (var f = 0; f < complexity.functions.length; f++) {
           var info = {
-            "Cyclomatic Density": Number(complexity.functions[f].cyclomaticDensity).toFixed(2),
+            "Cyclomatic Complexity": Number(complexity.functions[f].cyclomatic),
             "Halstead Difficulty": Number(complexity.functions[f].halstead.difficulty).toFixed(2),
             "Function": complexity.functions[f].name + " (Line " + complexity.functions[f].line + ")"
           };

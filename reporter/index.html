@@ -24,14 +24,16 @@
           <strong>Cyclomatic Density:</strong> {{complexity.aggregate.cyclomatic}}
           <br>
           <strong>Maintainability:</strong> {{complexity.maintainability}}
+          <br>
+          <strong>Estimated Bugs:</strong> {{complexity.aggregate.halstead.bugs}}
         </div>
         <div class="column-16">
           <graph data="complexity.chart" height="400px" width="100%">
             <x field="Halstead Difficulty" type="Measure"></x>
-            <y field="Cyclomatic Density" type="Measure"></y>
+            <y field="Cyclomatic Complexity" type="Measure"></y>
             <!-- plot all of Aperture's SKU's against profit and sales
                  'series' is the data you'd like to plot on the graph -->
-            <scatter-plot field="Halstead Difficulty" series="Cyclomatic Density" label="Function"></scatter-plot>
+            <scatter-plot field="Halstead Difficulty" series="Cyclomatic Complexity" label="Function"></scatter-plot>
           </graph>
         </div>
       </div>
