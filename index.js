@@ -29,14 +29,14 @@ function gulpESComplexReporterHTML ( ) {
           cwd = file.cwd;
         }
 
-        var newFile = file.clone();
+        var newFile = new gutil.File({
+          contents: new Buffer(JSON.stringify(analysis)),
+          cwd: file.cwd,
+          base: file.base,
+          path: file.base + "/complexity/" + file.relative + ".json"
+        });
 
         data.reports.push(newFile.path.split(newFile.cwd + "/")[1]);
-
-        newFile.contents = new Buffer(JSON.stringify(analysis));
-        newFile.base = file.base + "/complexity";
-        newFile.path = newFile.base + "/" + file.relative + ".json";
-
 
         if (!data.baseDir) {
           data.baseDir = file.base;
@@ -73,45 +73,50 @@ function gulpESComplexReporterHTML ( ) {
     data.created = new Date().toISOString();
     var indexFile = new gutil.File({
       cwd: data.cwd,
-      base: data.baseDir + "/complexity",
+      base: data.baseDir,
       path: data.baseDir + "/complexity/index.json",
       contents: new Buffer(JSON.stringify(data))
     });
 
     this.push(indexFile);
 
-    var reporter = fs.readFileSync('./reporter/index.html', 'utf8');
-    var css = fs.readFileSync('./reporter/css/site.css', 'utf8');
-    var js1 = fs.readFileSync('./reporter/js/angular-dimple.js', 'utf8');
-    var js2 = fs.readFileSync('./reporter/js/complexity.js', 'utf8');
+    var reporter = fs.readFileSync(__dirname + '/reporter/index.html', 'utf8');
+    var css = fs.readFileSync(__dirname + '/reporter/css/site.css', 'utf8');
+    var js1 = fs.readFileSync(__dirname + '/reporter/js/angular-dimple.js', 'utf8');
+    var js2 = fs.readFileSync(__dirname + '/reporter/js/complexity.js', 'utf8');
 
-    this.push(new gutil.File({
+    var f1 = new gutil.File({
       cwd: data.cwd,
       base: data.baseDir,
       path: data.baseDir + "/index.html",
       contents: new Buffer(reporter)
-    }));
+    });
 
-    this.push(new gutil.File({
+    var f2 = new gutil.File({
       cwd: data.cwd,
-      base: data.baseDir + "/css",
+      base: data.baseDir,
       path: data.baseDir + "/css/site.css",
       contents: new Buffer(css)
-    }));
+    });
 
-    this.push(new gutil.File({
+    var f3 = new gutil.File({
       cwd: data.cwd,
-      base: data.baseDir + "/js",
+      base: data.baseDir,
       path: data.baseDir + "/js/angular-dimple.js",
       contents: new Buffer(js1)
-    }));
+    });
 
-    this.push(new gutil.File({
+    var f4 = new gutil.File({
       cwd: data.cwd,
-      base: data.baseDir + "/js",
+      base: data.baseDir,
       path: data.baseDir + "/js/complexity.js",
       contents: new Buffer(js2)
-    }));
+    });
+
+    this.push(f1);
+    this.push(f2);
+    this.push(f3);
+    this.push(f4);
 
     callback();
   });

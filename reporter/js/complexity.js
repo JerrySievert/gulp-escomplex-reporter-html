@@ -8,7 +8,7 @@ app.controller('complexityController', function ($scope, $http) {
     var count = 0;
 
     for (var i = 0; i < data.reports.length; i++) {
-      $http.get('complexity/' + data.reports[i])
+      $http.get(data.reports[i])
       .success(function (complexity) {
         var functions = [ ];
         for (var f = 0; f < complexity.functions.length; f++) {
