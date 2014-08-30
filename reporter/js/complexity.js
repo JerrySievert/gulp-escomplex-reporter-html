@@ -5,6 +5,8 @@ app.controller('complexityController', function ($scope, $http) {
   $http.get('complexity/index.json')
   .success(function (data) {
     data.complexity = [ ];
+    data.readableDate = new Date(Date.parse(data.created)).toString();
+
     var count = 0;
 
     for (var i = 0; i < data.reports.length; i++) {
