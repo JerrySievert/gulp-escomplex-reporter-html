@@ -5,7 +5,7 @@ An HTML reporter for `gulp-escomplex`.
 ## Installing
 
 ```
-$ npm install --save-dev gulp-escomplex gulp-escomplex-reporter-json
+$ npm install --save-dev gulp-escomplex gulp-escomplex-reporter-html
 ```
 
 ## Usage
